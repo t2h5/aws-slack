@@ -1,1 +1,1 @@
-# cloudwatch-slack
+# aws-slack
