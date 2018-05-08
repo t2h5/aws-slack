@@ -1,0 +1,6 @@
+{
+  "rules": {
+    "standard/no-callback-literal": [0, ["callback"]]
+  },
+  "extends": "standard"
+}

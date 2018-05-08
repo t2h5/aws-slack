@@ -1,1 +1,3 @@
-# cloudwatch-slack
+# aws-slack
+
+Slack integration for AWS.
