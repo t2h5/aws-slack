@@ -1,4 +1,4 @@
-service: cloudwatch-slack-elasticbeanstalk
+service: elasticbeanstalk-slack
 
 provider:
   name: aws
