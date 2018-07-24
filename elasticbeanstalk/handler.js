@@ -1,6 +1,7 @@
 const AWS = require('aws-sdk')
 const url = require('url')
 const https = require('https')
+const util = require('./util')
 
 // The base-64 encoded, encrypted key (CiphertextBlob) stored in the kmsEncryptedHookUrl environment variable
 const kmsEncryptedHookUrl = process.env.kmsEncryptedHookUrl
@@ -38,26 +39,7 @@ function postMessage (message, callback) {
 }
 
 function processEvent (event, callback) {
-  let text
-  try {
-    const message = JSON.parse(event.Records[0].Sns.Message)
-    const alarmName = message.AlarmName
-    // var oldState = message.OldStateValue;
-    const newState = message.NewStateValue
-    const reason = message.NewStateReason
-    text = `${alarmName} state is now ${newState}: ${reason}`
-  } catch (e) {
-    console.debug(e)
-    text = event.Records[0].Sns.Message
-  }
-
-  const slackMessage = {
-    channel: slackChannel,
-    attachments: [{
-      color: 'gray',
-      text
-    }]
-  }
+  const slackMessage = util.generateMessage(event, slackChannel)
 
   postMessage(slackMessage, (response) => {
     if (response.statusCode < 400) {
