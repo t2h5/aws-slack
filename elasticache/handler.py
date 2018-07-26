@@ -17,4 +17,8 @@ REDIS = redis.StrictRedis(
 def handler(event, context):
     LOGGER.info('event: %s', event)
     LOGGER.info('context: %s', context)
-    LOGGER.debug(REDIS.info())
+    message = event['Records'][0]['Sns']['Message']
+    if message == 'info':
+        LOGGER.info(REDIS.info())
+    else:
+        LOGGER.debug('invalid message: %s', message)
