@@ -1,0 +1,41 @@
+service: elasticache-slack
+
+provider:
+  name: aws
+  runtime: python3.6
+  stage: dev
+  region: ap-northeast-1
+  memorySize: 128
+  timeout: 8
+  iamManegedPolicies:
+    - arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - elasticache:*
+      Resource: ${env:REDIS_ARN}
+  environment:
+    REDIS_HOST: ${env:REDIS_HOST}
+
+package:
+  exclude:
+    - .serverless/**
+    - node_modules/**
+    - Dockerfile
+    - package.json
+    - yarn.lock
+    - requirements.txt
+    - README.md
+
+functions:
+  handler:
+    handler: handler.handler
+    events:
+      - sns: ${env:TOPIC_ARN}
+    vpc:
+      securityGroupIds:
+        - ${env:SG_ID}
+      subnetIds:
+        - ${env:SUBNET_A_ID}
+        - ${env:SUBNET_C_ID}
+        - ${env:SUBNET_D_ID}
