@@ -20,5 +20,7 @@ def handler(event, context):
     message = event['Records'][0]['Sns']['Message']
     if message == 'info':
         LOGGER.info(REDIS.info())
+    elif message == 'flushdb':
+        LOGGER.info(REDIS.flushdb())
     else:
         LOGGER.debug('invalid message: %s', message)
