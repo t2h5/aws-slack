@@ -38,4 +38,3 @@ functions:
       subnetIds:
         - ${env:SUBNET_A_ID}
         - ${env:SUBNET_C_ID}
-        - ${env:SUBNET_D_ID}
