@@ -41,7 +41,10 @@ function postMessage (message, callback) {
 function processEvent (event, callback) {
   const slackMessage = util.generateMessage(event, slackChannel)
 
-  if (slackMessage) {
+  if (slackMessage == null) {
+    console.info('skip notification')
+    callback(null)
+  } else {
     postMessage(slackMessage, (response) => {
       if (response.statusCode < 400) {
         console.info('Message posted successfully')
@@ -55,8 +58,6 @@ function processEvent (event, callback) {
       }
     })
   }
-  console.info('skip notification')
-  callback(null)
 }
 
 exports.handler = (event, context, callback) => {

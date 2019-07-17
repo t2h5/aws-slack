@@ -1,6 +1,6 @@
 exports.generateMessage = (event, slackChannel) => {
   const message = event.Records[0].Sns.Message
-  if (message.indexOf('New application version was deployed')) {
+  if (message.indexOf('New application version was deployed') !== -1) {
     const text = message
     const color = setColor(message)
     const slackMessage = {
