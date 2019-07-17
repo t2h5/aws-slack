@@ -11,7 +11,7 @@ let hookUrl
 
 function postMessage (message, callback) {
   const body = JSON.stringify(message)
-  const options = new url.URL(hookUrl)
+  const options = url.parse(hookUrl) // eslint-disable-line
   options.method = 'POST'
   options.headers = {
     'Content-Type': 'application/json',
