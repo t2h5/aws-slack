@@ -1,4 +1,4 @@
-FROM amazonlinux:2017.03
+FROM amazonlinux:1
 
 WORKDIR /wd
 
