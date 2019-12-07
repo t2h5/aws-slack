@@ -2,11 +2,10 @@
 
 Install packages on **Amazon Linux**.
 
-https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/current-supported-versions.html
+- https://github.com/lambci/docker-lambda
+- https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/current-supported-versions.html
 
 ```
-# build image
-$ docker build . -t lambda_deps_builder:python3.6
-# run pip install on amazonlinux
-$ docker run --rm -v "$PWD":/wd lambda_deps_builder:python3.6 pip install -U -r requirements.txt -t ./lib
+# install dependencies into ./lib via container
+$ docker run --rm -v "$PWD":/wd -w /wd lambci/lambda:build-python3.7 pip install -U -r requirements.txt -t ./lib
 ```
