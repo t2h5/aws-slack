@@ -1,7 +1,7 @@
 exports.generateMessage = (event, slackChannel) => {
   const message = event.Records[0].Sns.Message
-  let text = message
-  let color = setColor(message)
+  const text = message
+  const color = setColor(message)
   const slackMessage = {
     channel: slackChannel,
     attachments: [{
