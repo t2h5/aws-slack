@@ -1,10 +1,6 @@
 # pylint: disable=missing-docstring
 import logging
 import os
-import sys
-
-# pylint: disable=wrong-import-position
-sys.path.append('./lib')
 import redis
 
 LOGGER = logging.getLogger()
