@@ -17,6 +17,17 @@ provider:
   environment:
     REDIS_HOST: ${env:REDIS_HOST}
 
+plugins:
+  - serverless-prune-plugin
+  - serverless-python-requirements
+
+custom:
+  prune:
+    automatic: true
+    number: 5
+  pythonRequirements:
+    dockreImage: lambci/lambda:build-python3.7
+
 package:
   exclude:
     - .serverless/**
