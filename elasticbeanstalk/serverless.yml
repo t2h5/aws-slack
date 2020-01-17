@@ -2,7 +2,7 @@ service: elasticbeanstalk-slack
 
 provider:
   name: aws
-  runtime: nodejs10.x
+  runtime: nodejs12.x
   stage: dev
   region: ap-northeast-1
   memorySize: 128
@@ -14,9 +14,18 @@ provider:
       Resource:
         - ${env:KMS_KEY_ARN}
 
+plugins:
+  - serverless-prune-plugin
+
+custom:
+  prune:
+    automatic: true
+    number: 5
+
 package:
   exclude:
     - node_modules/**
+    - events/**
 
 functions:
   handler:
