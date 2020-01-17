@@ -1,3 +1,5 @@
+const onlyNewDeployment = process.env.onlyNewDeployment
+
 exports.generateMessage = (event, slackChannel) => {
   const message = event.Records[0].Sns.Message
   const text = message
@@ -8,6 +10,10 @@ exports.generateMessage = (event, slackChannel) => {
       color,
       text
     }]
+  }
+  const skip = !!onlyNewDeployment && message.indexOf('New application version was deployed') === -1
+  if (skip) {
+    return null
   }
   return slackMessage
 }

@@ -33,5 +33,6 @@ functions:
     environment:
       kmsEncryptedHookUrl: ${env:WEBHOOK_URL}
       slackChannel: ${env:SLACK_CHANNEL}
+      onlyNewDeployment: ${env:ONLY_NEW_DEPLOYMENT}
     events:
       - sns: ${env:SNS_ARN}

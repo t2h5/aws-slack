@@ -41,18 +41,23 @@ function postMessage (message, callback) {
 function processEvent (event, callback) {
   const slackMessage = util.generateMessage(event, slackChannel)
 
-  postMessage(slackMessage, (response) => {
-    if (response.statusCode < 400) {
-      console.info('Message posted successfully')
-      callback(null)
-    } else if (response.statusCode < 500) {
-      console.error(`Error posting message to Slack API: ${response.statusCode} - ${response.statusMessage}`)
-      callback(null) // Don't retry because the error is due to a problem with the request
-    } else {
+  if (slackMessage == null) {
+    console.info('skip notification')
+    callback(null)
+  } else {
+    postMessage(slackMessage, (response) => {
+      if (response.statusCode < 400) {
+        console.info('Message posted successfully')
+        callback(null)
+      } else if (response.statusCode < 500) {
+        console.error(`Error posting message to Slack API: ${response.statusCode} - ${response.statusMessage}`)
+        callback(null) // Don't retry because the error is due to a problem with the request
+      } else {
       // Let Lambda retry
-      callback(`Server error when processing message: ${response.statusCode} - ${response.statusMessage}`)
-    }
-  })
+        callback(`Server error when processing message: ${response.statusCode} - ${response.statusMessage}`)
+      }
+    })
+  }
 }
 
 exports.handler = (event, context, callback) => {
