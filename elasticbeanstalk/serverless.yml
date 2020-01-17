@@ -2,7 +2,7 @@ service: elasticbeanstalk-slack
 
 provider:
   name: aws
-  runtime: nodejs10.x
+  runtime: nodejs12.x
   stage: dev
   region: ap-northeast-1
   memorySize: 128
@@ -17,6 +17,7 @@ provider:
 package:
   exclude:
     - node_modules/**
+    - events/**
 
 functions:
   handler:
