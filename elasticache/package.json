@@ -1,12 +1,13 @@
 {
   "name": "elasticache",
-  "version": "1.0.0",
   "license": "MIT",
-  "devDependencies": {
-    "serverless": "^1.58.0"
-  },
   "scripts": {
     "deploy": "sls deploy -v",
     "deploy:function": "sls deploy -v -f handler"
+  },
+  "devDependencies": {
+    "serverless": "^1.61.2",
+    "serverless-prune-plugin": "^1.4.1",
+    "serverless-python-requirements": "^5.0.1"
   }
 }
