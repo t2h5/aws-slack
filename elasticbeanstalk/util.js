@@ -1,18 +1,21 @@
+const onlyNewDeployment = process.env.onlyNewDeployment
+
 exports.generateMessage = (event, slackChannel) => {
   const message = event.Records[0].Sns.Message
-  if (message.indexOf('New application version was deployed') !== -1) {
-    const text = message
-    const color = setColor(message)
-    const slackMessage = {
-      channel: slackChannel,
-      attachments: [{
-        color,
-        text
-      }]
-    }
-    return slackMessage
+  const text = message
+  const color = setColor(message)
+  const slackMessage = {
+    channel: slackChannel,
+    attachments: [{
+      color,
+      text
+    }]
   }
-  return null
+  const skip = !!onlyNewDeployment && message.indexOf('New application version was deployed') === -1
+  if (skip) {
+    return null
+  }
+  return slackMessage
 }
 
 const setColor = (message) => {
