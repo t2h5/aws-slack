@@ -6,7 +6,7 @@
     "deploy:function": "sls deploy -v -f handler"
   },
   "devDependencies": {
-    "serverless": "^1.61.2",
+    "serverless": "^1.61.3",
     "serverless-prune-plugin": "^1.4.1",
     "serverless-python-requirements": "^5.0.1"
   }
