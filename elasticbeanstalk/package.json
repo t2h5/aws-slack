@@ -12,11 +12,11 @@
   "devDependencies": {
     "eslint": "^6.8.0",
     "eslint-config-standard": "^14.1.0",
-    "eslint-plugin-import": "^2.20.0",
+    "eslint-plugin-import": "^2.20.1",
     "eslint-plugin-node": "^11.0.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.0",
-    "serverless": "^1.61.3",
-    "serverless-prune-plugin": "^1.4.1"
+    "serverless": "^1.66.0",
+    "serverless-prune-plugin": "^1.4.2"
   }
 }
